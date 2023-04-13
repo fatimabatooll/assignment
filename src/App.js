@@ -4,21 +4,40 @@ import Goals from './Components/Goals';
 import Header from './Components/Header';
 
 function App() {
-  const [data, setData] = useState([])
-  const handleDelete = (title) => {
-   // console.log(title)
-   let filterData = data.filter((e) => e.title != title);
-   setData(filterData)
-  }
-  
+  const [todos, setTodos] = useState([]);
+  const [editingTodo, setEditingTodo] = useState(null);
+
+
+  const addTodo = (id,title, info) => {
+    console.log(title)
+    const newTodo = { id: Date.now(), title, info };
+    setTodos([...todos, newTodo]);
+  };
+
+  const editTodo = todo => {
+    console.log(todo)
+    setEditingTodo(todo);
+  };
+
+  const saveTodo = (id, title, info) => {
+    const updatedTodos = todos.map(todo =>
+      todo.id === id ? { ...todo, title, info } : todo
+    );
+    setTodos(updatedTodos);
+    setEditingTodo(null);
+  };
+
+  const deleteTodo = id => {
+    const filteredTodos = todos.filter(todo => todo.id !== id);
+    setTodos(filteredTodos);
+  };
   return (
     <div className="App">
-      <Header setData={setData} data={data}/>
-      {data.map((e) => {
-        return(
-          <Goals title={e.title} info={e.info} handleDelete={handleDelete}/>
-        )
-      })}
+      {editingTodo ? (<Header onSubmit={saveTodo} todo={editingTodo}  />) : (<Header onSubmit={addTodo} />)}
+
+
+      <Goals todos={todos} onEdit={editTodo} onDelete={deleteTodo} />
+
     </div>
   );
 }

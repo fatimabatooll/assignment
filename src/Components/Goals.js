@@ -1,11 +1,18 @@
 import React from 'react'
 
-const Goals = ({title, info, handleDelete}) => {
+const Goals = ({ todos, onEdit, onDelete }) => {
   return (
     <div>
-    <h1>{title}</h1>
-    <p>{info}</p>
-    <button onClick={() => {handleDelete(title)} }>Delete</button>
+    <ul>
+      {todos.map(todo => (
+        <li key={todo.id}>
+          <h3>{todo.title}</h3>
+          <p>{todo.info}</p>
+          <button onClick={() => onEdit(todo)}>Edit</button>
+          <button onClick={() => onDelete(todo.id)}>Delete</button>
+        </li>
+      ))}
+    </ul>
     </div>
   )
 }
