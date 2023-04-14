@@ -32,13 +32,11 @@ function App() {
     setTodos(filteredTodos);
   };
   return (
-    <div className="App">
+    <section className="section-center">
       {editingTodo ? (<Header onSubmit={saveTodo} todo={editingTodo}  />) : (<Header onSubmit={addTodo} />)}
-
-
       <Goals todos={todos} onEdit={editTodo} onDelete={deleteTodo} />
+    </section>
 
-    </div>
   );
 }
 

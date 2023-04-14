@@ -27,31 +27,36 @@ const Header = ({ onSubmit, todo }) => {
   
     
   return (
-    <div>
-        <h3>My Goals For This Book</h3>
-        
-        <form onSubmit={handleSubmit}>
-      <label htmlFor="title">Title:</label>
+    <div className=''>
+        <h3>My Goals For Today</h3>
+        <section className='section-div'>
+        <form className='form-div' onSubmit={handleSubmit}>
+      <div className='form-control'>
+      <h4>Title:</h4>
       <input
         type="text"
         id="title"
+        className='todo'
         name="title"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
 
-      <label htmlFor="info">Info:</label>
+      <h4>Description:</h4>
       <input
         type="text"
+        className='todo'
         id="info"
         name="info"
         value={info}
         onChange={e => setInfo(e.target.value)}
       />
 
-      <button type="submit">{todo ? 'Save' : 'Add Todo'}</button>
+      <button className='submit-btn' type="submit">{todo ? 'Save' : 'Add Todo'}</button>
+      </div>
     </form>
-        
+    
+    </section>
     </div>
   )
 }
